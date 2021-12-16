@@ -87,6 +87,6 @@ while (playAgain === "yes") {
         }
     }
     playAgain = prompt("Do you want to play again? Type yes or no.");
-    //used for play again feature used at the start of the program
+    //used for the play again feature used at the start of the program
 }
 alert("Thanks for playing! Come back soon!");
