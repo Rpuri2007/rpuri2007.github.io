@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="height:500px; width:1000px; border:1px solid blue;">
+    <div style="text-align:center">
+        <h1>This is Evee, she is my pokemon pet</h1>
+        <p>Feed and hug Evee to keep her happy</p>
+        <img src="images/eevee-happy.png" alt="Happy Eevee">
+        <p>Rowing</p>
+    </div>
+
+    <div style="position: absolute; top:360px; left: 175px;">
+        <h3>Row Faster</h3>
+        <meter id="rowfaster-meter" min="0" max="10" value="5"></meter>
+        <p id="rowfaster-paragraph">5</p>
+        <button id="faster-button" onclick="fasterButton()">Row Faster!</button>
+    </div>
+    <div style="position: absolute; top:360px; left: 475px;">
+        <h3>Row Together</h3>
+        <meter id="rowTogether-meter" min="0" max="10" value="5"></meter>
+        <p id="rowTogether-paragraph">5</p>
+        <button id="together-button" onclick="togetherButton()">Row Together!</button>
+    </div>
+    <div style="position: absolute; top:360px; left: 775px;">
+        <h3>Row On Course</h3>
+        <meter id="onCourse-meter" min="0" max="10" value="5"></meter>
+        <p id="onCourse-paragraph">5</p>
+        <button id="onCourse-button" onclick="courseButton()">Get on course!</button>
+    </div>
+    <script src="js/pet.js"></script>
+</body>
+
+</html>
