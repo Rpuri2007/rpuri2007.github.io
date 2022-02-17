@@ -1,5 +1,6 @@
 let myCanvas = document.getElementById("my-canvas");
 let ctx = myCanvas.getContext("2d");
+let emoji = document.getElementById("emoji")
 
 let xPosition = 0;
 let yPosition = 0;
@@ -16,7 +17,8 @@ let ballYDir = 2;
 const BALL_RADIUS = 15;
 const PADDLE_WIDTH = 100;
 const PADDLE_HEIGHT = 20;
-
+const IMG_WIDTH = 40;
+const IMG_HEIGHT = 40;
 
 function moveHorizontal() {
     ctx.clearRect(0, 0, 500, 500)
@@ -94,6 +96,10 @@ function drawBall() {
     ctx.fill();
 }
 
+function drawImage() {
+    ctx.drawImage(emoji, ballX, ballY, IMG_WIDTH, IMG_HEIGHT);
+}
+
 
 function moveBall() {
     ballY += ballYDir;
@@ -101,9 +107,9 @@ function moveBall() {
 }
 
 function checkBallCollision() {
-    if (ballY > 500 - BALL_RADIUS || (ballY < 0 + BALL_RADIUS)) {
+    if (ballY > 460 - BALL_RADIUS || (ballY < 0 + BALL_RADIUS)) {
         ballYDir = -ballYDir;
-    } else if ((ballX > 500 - BALL_RADIUS) || (ballX < 0 + BALL_RADIUS)) {
+    } else if ((ballX > 460 - BALL_RADIUS) || (ballX < 0 + BALL_RADIUS)) {
         ballXDir = -ballXDir;
     }
     if (ballX + BALL_RADIUS >= playerX && ballX - BALL_RADIUS <= playerX + PADDLE_WIDTH && ballY + BALL_RADIUS >= playerY && ballY - BALL_RADIUS <= playerY + PADDLE_HEIGHT) {
@@ -119,7 +125,7 @@ function refreshUI() {
     movePlayer();
     drawPlayer();
     moveBall();
-    drawBall();
+    drawImage();
     checkBallCollision();
 }
 
@@ -132,4 +138,4 @@ function bounceHorizontal() {
     }
 }
 
-setInterval(refreshUI, 10);
+setInterval(refreshUI, 10)
