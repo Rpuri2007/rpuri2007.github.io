@@ -1,6 +1,8 @@
 let myCanvas = document.getElementById("my-canvas");
 let ctx = myCanvas.getContext("2d");
 let emoji = document.getElementById("emoji")
+let keydownOutput = document.getElementById("keydown-output")
+let keyupOutput = document.getElementById("keyup-output")
 
 let xPosition = 0;
 let yPosition = 0;
@@ -20,6 +22,7 @@ const PADDLE_HEIGHT = 20;
 const IMG_WIDTH = 40;
 const IMG_HEIGHT = 40;
 
+/*
 function moveHorizontal() {
     ctx.clearRect(0, 0, 500, 500)
     ctx.fillRect(xPosition, 0, 20, 20);
@@ -38,8 +41,7 @@ function moveVertical() {
     }
 }
 
-let keydownOutput = document.getElementById("keydown-output")
-let keyupOutput = document.getElementById("keyup-output")
+*/
 
 function keyPressed(event) {
     let key = event.keyCode;
@@ -90,6 +92,7 @@ function movePlayer() {
     }
 }
 
+/*
 function drawBall() {
     ctx.beginPath();
     ctx.arc(ballX, ballY, BALL_RADIUS, 0, 2 * Math.PI);
@@ -101,10 +104,12 @@ function drawImage() {
 }
 
 
+
 function moveBall() {
     ballY += ballYDir;
     ballX += ballXDir;
 }
+
 
 function checkBallCollision() {
     if (ballY > 460 - BALL_RADIUS || (ballY < 0 + BALL_RADIUS)) {
@@ -117,6 +122,7 @@ function checkBallCollision() {
     }
 
 }
+*/
 
 
 
@@ -124,9 +130,9 @@ function refreshUI() {
     ctx.clearRect(0, 0, 500, 500)
     movePlayer();
     drawPlayer();
-    moveBall();
-    drawImage();
-    checkBallCollision();
+    //moveBall();
+    //drawImage();
+    //checkBallCollision();
 }
 
 function bounceHorizontal() {

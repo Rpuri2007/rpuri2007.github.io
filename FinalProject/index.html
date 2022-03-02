@@ -9,11 +9,30 @@
 </head>
 
 <body onkeydown="keyPressed(event)" onkeyup="keyReleased(event)">
-    <h1>Welcome to the Maze!</h1>
+    <h1>Welcome to the Impossible Maze!</h1>
     <canvas id="my-canvas" width="500" height="500" style="border:1px solid black"></canvas>
-    <p id="keyup-output"></p>
     <p id="keydown-output"></p>
+    <p id="keyup-output"></p>
     <script src="js/finalproject.js"></script>
+
+    <div style="position: absolute; top:75px; left: 550px;">
+        <h3>Lives</h3>
+        <meter id="death-meter" min="0" max="10" value="10"></meter>
+        <p id="death-paragraph">10</p>
+    </div>
+
+    <div style="position: absolute; top:200px; left: 550px;">
+        <h3>Boss Health</h3>
+        <meter id="bosshealth-meter" min="0" max="3" value="3"></meter>
+        <p id="bosshealth-paragraph">3</p>
+    </div>
+
+    <div style="position: absolute; top:325px; left: 550px;">
+        <h3>Timer</h3>
+        <meter id="timer-meter" min="0" max="60" value="60"></meter>
+        <p id="timer-paragraph">60</p>
+
+    </div>
 </body>
 
 </html>
