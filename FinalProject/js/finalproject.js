@@ -212,16 +212,23 @@ function checkAlert() {
 
 }
 
+let obstacle2Width = 10;
+let obstacle2Height = 150;
+const MAZE2_X = 150;
+const MAZE2_Y = 350;
+
 class Rectangle2 {
-    constructor(obstacleWidth, obstacleHeight, MAZE_X, MAZE_Y) {
-        this.obstacleWidth = obstacleWidth
-        this.obstacleHeight = obstacleHeight
-        this.MAZE_X = MAZE_X
-        this.MAZE_Y = MAZE_Y
+    constructor(obstacle2Width, obstacle2Height, MAZE2_X, MAZE2_Y) {
+        this.obstacle2Width = obstacle2Width
+        this.obstacle2Height = obstacle2Height
+        this.MAZE2_X = MAZE2_X
+        this.MAZE2_Y = MAZE2_Y
     }
 }
 
-const rectangles2 = [new Rectangle2(30, 150, 150, 350), new Rectangle2(10, 150, 185, 200), new Rectangle2(190, 10, 0, 200, ), new Rectangle2(10, 450, 250, 100), new Rectangle2(10, 75, 250, 0)];
+
+
+const rectangles2 = [new Rectangle2(300, 150, 150, 350), new Rectangle2(10, 150, 185, 200), new Rectangle2(190, 10, 0, 200, ), new Rectangle2(10, 450, 250, 100), new Rectangle2(10, 75, 250, 0)];
 
 function drawMaze2() {
     ctx.fillStyle = "black";
