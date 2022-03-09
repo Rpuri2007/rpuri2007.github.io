@@ -1,6 +1,7 @@
 let livesCount = 10;
 let bossHealth = 3;
 let timer = 60;
+let levelCounter = 1;
 let myCanvas = document.getElementById("my-canvas");
 let ctx = myCanvas.getContext("2d");
 let keydownOutput = document.getElementById("keydown-output");
@@ -56,7 +57,7 @@ let checkPointWidth = 20;
 let checkPointHeight = 20;
 const CHECKPOINT_X = 475;
 const CHECKPOINT_Y = 475;
-let level = 0
+let level = 1;
 
 function meterRefresh() {
     let deathMeter = document.getElementById("death-meter")
@@ -71,13 +72,18 @@ function meterRefresh() {
     timerMeter.value = timer;
     let timerParagraph = document.getElementById("timer-paragraph")
     timerParagraph.innerHTML = timer;
+    let levelMeter = document.getElementById("level-meter")
+    levelMeter.value = level;
+    let levelParagraph = document.getElementById("level-paragraph");
+    levelParagraph.innerHTML = level;
 }
 
 function refreshUITimer() {
     if (timer > 0) {
         timer--
-    } else {
-        alert("you lose")
+    } else if (timer === 0) {
+        clearInterval(myInterval);
+        alert("You lose the game. Refresh to play again.");
     }
 }
 
@@ -131,25 +137,17 @@ function movePlayer() {
     }
 }
 
-function drawMaze() {
+function drawMaze2() {
     ctx.fillStyle = "black";
     for (i = 0; i < rectangles.length; i++) {
         ctx.fillRect(rectangles[i].MAZE_X, rectangles[i].MAZE_Y, rectangles[i].obstacleWidth, rectangles[i].obstacleHeight);
     }
-    /*
-    ctx.fillRect(MAZE_X, MAZE_Y, obstacleWidth, obstacleHeight)
-    ctx.fillRect(MAZE_X2, MAZE_Y2, obstacleWidth2, obstacleHeight2)
-    ctx.fillRect(MAZE_X3, MAZE_Y3, obstacleWidth3, obstacleHeight3)
-    ctx.fillRect(MAZE_X4, MAZE_Y4, obstacleWidth4, obstacleHeight4)
-    ctx.fillRect(MAZE_X5, MAZE_Y5, obstacleWidth5, obstacleHeight5)
-    ctx.fillStyle = "green";
-    ctx.fillRect(CHECKPOINT_X, CHECKPOINT_Y, checkPointWidth, checkPointHeight)
-*/
     ctx.fillStyle = "green";
     ctx.fillRect(CHECKPOINT_X, CHECKPOINT_Y, checkPointWidth, checkPointHeight)
 }
 
-function collisionCheck() {
+function collisionCheck2() {
+    console.log("check2")
     if (playerXPosition + PLAYER_WIDTH >= MAZE_X && playerXPosition <= MAZE_X + obstacleWidth && playerYPosition + PLAYER_HEIGHT >= MAZE_Y && playerYPosition <= MAZE_Y + obstacleHeight) {
         playerXPosition = 30
         playerYPosition = 450
@@ -193,29 +191,45 @@ function collisionCheck() {
     } else if (playerXPosition + PLAYER_WIDTH >= CHECKPOINT_X && playerXPosition <= CHECKPOINT_X + checkPointWidth && playerYPosition + PLAYER_HEIGHT >= CHECKPOINT_Y && playerYPosition <= CHECKPOINT_Y + checkPointHeight) {
         playerXPosition = 30
         playerYPosition = 450
+            ++level;
         if (bossHealth > 0) {
             bossHealth--;
-        } else {
-            alertCheck += 2;
         }
     }
 }
 
-function checkAlert() {
-    if (alertCheck === 1) {
-        alert("You lose the game")
-        alertCheck += 2;
-    } else if (alertCheck === 2) {
-        alert("You win the game!")
-        alertCheck++;
-    }
-
-}
 
 let obstacle2Width = 10;
 let obstacle2Height = 150;
-const MAZE2_X = 150;
-const MAZE2_Y = 350;
+let MAZE2_X = 200;
+let MAZE2_Y = 350;
+
+let obstacle2Width2 = 10;
+let obstacle2Height2 = 200;
+let MAZE2_X2 = 200;
+let MAZE2_Y2 = 0;
+
+let obstacle2Width3 = 150;
+let obstacle2Height3 = 10;
+let MAZE2_X3 = 300;
+let MAZE2_Y3 = 350;
+
+let obstacle2Width4 = 10;
+let obstacle2Height4 = 350;
+let MAZE2_X4 = 250;
+let MAZE2_Y4 = 315;
+
+let obstacle2Width5 = 10;
+let obstacle2Height5 = 175;
+let MAZE2_X5 = 250;
+let MAZE2_Y5 = 0;
+
+let checkPointWidth2 = 20;
+let checkPointHeight2 = 20;
+let CHECKPOINT2_X = 475;
+let CHECKPOINT2_Y = 475;
+
+
 
 class Rectangle2 {
     constructor(obstacle2Width, obstacle2Height, MAZE2_X, MAZE2_Y) {
@@ -228,36 +242,203 @@ class Rectangle2 {
 
 
 
-const rectangles2 = [new Rectangle2(300, 150, 150, 350), new Rectangle2(10, 150, 185, 200), new Rectangle2(190, 10, 0, 200, ), new Rectangle2(10, 450, 250, 100), new Rectangle2(10, 75, 250, 0)];
+const rectangles2 = [new Rectangle2(10, 150, 200, 350), new Rectangle2(10, 200, 200, 0), new Rectangle2(150, 10, 300, 350), new Rectangle2(10, 350, 250, 315), new Rectangle2(10, 175, 250, 0)];
 
-function drawMaze2() {
+function collisionCheck() {
+    console.log("check1")
+    if (playerXPosition + PLAYER_WIDTH >= MAZE2_X && playerXPosition <= MAZE2_X + obstacle2Width && playerYPosition + PLAYER_HEIGHT >= MAZE2_Y && playerYPosition <= MAZE2_Y + obstacle2Height) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 0) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE2_X2 && playerXPosition <= MAZE2_X2 + obstacle2Width2 && playerYPosition + PLAYER_HEIGHT >= MAZE2_Y2 && playerYPosition <= MAZE2_Y2 + obstacle2Height2) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 0) {
+            livesCount--;
+        } else if (livesCount = 0) {
+            alertCheck++;
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE2_X3 && playerXPosition <= MAZE2_X3 + obstacle2Width3 && playerYPosition + PLAYER_HEIGHT >= MAZE2_Y3 && playerYPosition <= MAZE2_Y3 + obstacle2Height3) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 1) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE2_X4 && playerXPosition <= MAZE2_X4 + obstacle2Width4 && playerYPosition + PLAYER_HEIGHT >= MAZE2_Y4 && playerYPosition <= MAZE2_Y4 + obstacle2Height4) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 1) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE2_X5 && playerXPosition <= MAZE2_X5 + obstacle2Width5 && playerYPosition + PLAYER_HEIGHT >= MAZE2_Y5 && playerYPosition <= MAZE2_Y5 + obstacle2Height5) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 1) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= CHECKPOINT2_X && playerXPosition <= CHECKPOINT2_X + checkPointWidth2 && playerYPosition + PLAYER_HEIGHT >= CHECKPOINT2_Y && playerYPosition <= CHECKPOINT2_Y + checkPointHeight2) {
+        playerXPosition = 30
+        playerYPosition = 450
+            ++level;
+        if (bossHealth > 0) {
+            bossHealth--;
+        }
+    }
+}
+
+function drawMaze() {
     ctx.fillStyle = "black";
     for (i = 0; i < rectangles2.length; i++) {
-        ctx.fillRect(rectangles2[i].MAZE_X, rectangles2[i].MAZE_Y, rectangles2[i].obstacleWidth, rectangles2[i].obstacleHeight);
+        ctx.fillRect(rectangles2[i].MAZE2_X, rectangles2[i].MAZE2_Y, rectangles2[i].obstacle2Width, rectangles2[i].obstacle2Height);
     }
-}
-
-function levelCheck() {
-    if (playerXPosition + PLAYER_WIDTH >= CHECKPOINT_X && playerXPosition <= CHECKPOINT_X + checkPointWidth && playerYPosition + PLAYER_HEIGHT >= CHECKPOINT_Y && playerYPosition <= CHECKPOINT_Y + checkPointHeight) {
-        ++level;
-    }
+    ctx.fillStyle = "green";
+    ctx.fillRect(CHECKPOINT2_X, CHECKPOINT2_Y, checkPointWidth2, checkPointHeight2)
 }
 
 
+function drawMaze3() {
+    ctx.fillStyle = "black";
+    ctx.fillStyle = "green";
+    ctx.fillRect(CHECKPOINT2_X, CHECKPOINT2_Y, checkPointWidth2, checkPointHeight2)
+}
+
+function drawCheckpoint() {
+    ctx.fillStyle = "green";
+    ctx.fillRect(CHECKPOINT_X, CHECKPOINT_Y, checkPointWidth, checkPointHeight)
+}
+
+let obstacle3Width = 10;
+let obstacle3Height = 150;
+let MAZE3_X = 300;
+let MAZE3_Y = 350;
+
+let obstacle3Width2 = 10;
+let obstacle3Height2 = 200;
+let MAZE3_X2 = 200;
+let MAZE3_Y2 = 0;
+
+let obstacle3Width3 = 150;
+let obstacle3Height3 = 10;
+let MAZE3_X3 = 300;
+let MAZE3_Y3 = 350;
+
+let obstacle3Width4 = 10;
+let obstacle3Height4 = 350;
+let MAZE3_X4 = 250;
+let MAZE3_Y4 = 300;
+
+let obstacle3Width5 = 175;
+let obstacle3Height5 = 10;
+let MAZE3_X5 = 0;
+let MAZE3_Y5 = 250;
+
+let checkPointWidth3 = 20;
+let checkPointHeight3 = 20;
+let CHECKPOINT3_X = 475;
+let CHECKPOINT3_Y = 475;
+
+
+
+class Rectangle3 {
+    constructor(obstacle3Width, obstacle3Height, MAZE3_X, MAZE3_Y) {
+        this.obstacle3Width = obstacle3Width
+        this.obstacle3Height = obstacle3Height
+        this.MAZE3_X = MAZE3_X
+        this.MAZE3_Y = MAZE3_Y
+    }
+}
+
+
+
+const rectangles3 = [new Rectangle3(10, 150, 300, 350), new Rectangle3(10, 200, 200, 0), new Rectangle3(150, 10, 300, 350), new Rectangle3(10, 350, 250, 300), new Rectangle3(175, 10, 0, 250)];
+
+function collisionCheck3() {
+    console.log("check3")
+    if (playerXPosition + PLAYER_WIDTH >= MAZE3_X && playerXPosition <= MAZE3_X + obstacle3Width && playerYPosition + PLAYER_HEIGHT >= MAZE3_Y && playerYPosition <= MAZE3_Y + obstacle3Height) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 0) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE3_X2 && playerXPosition <= MAZE3_X2 + obstacle3Width2 && playerYPosition + PLAYER_HEIGHT >= MAZE3_Y2 && playerYPosition <= MAZE3_Y2 + obstacle3Height2) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 0) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE3_X3 && playerXPosition <= MAZE3_X3 + obstacle3Width3 && playerYPosition + PLAYER_HEIGHT >= MAZE3_Y3 && playerYPosition <= MAZE3_Y3 + obstacle3Height3) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 1) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE3_X4 && playerXPosition <= MAZE3_X4 + obstacle3Width4 && playerYPosition + PLAYER_HEIGHT >= MAZE3_Y4 && playerYPosition <= MAZE3_Y4 + obstacle3Height4) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 1) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= MAZE3_X5 && playerXPosition <= MAZE3_X5 + obstacle3Width5 && playerYPosition + PLAYER_HEIGHT >= MAZE3_Y5 && playerYPosition <= MAZE3_Y5 + obstacle3Height5) {
+        playerXPosition = 30
+        playerYPosition = 450
+        if (livesCount > 1) {
+            livesCount--;
+        } else {
+            alertCheck++
+        }
+    } else if (playerXPosition + PLAYER_WIDTH >= CHECKPOINT3_X && playerXPosition <= CHECKPOINT3_X + checkPointWidth3 && playerYPosition + PLAYER_HEIGHT >= CHECKPOINT3_Y && playerYPosition <= CHECKPOINT3_Y + checkPointHeight3) {
+        clearInterval(myInterval);
+        playerXPosition = 30
+        playerYPosition = 450
+        alert("You win the game! Refresh to play again. ")
+    }
+}
+
+function checkAlert() {
+    if (alertCheck === 1) {
+        alert("You lost the game. Refresh to play again.")
+        clearInterval(myInterval);
+        alertCheck += 2;
+    }
+}
 
 function refreshUI() {
     ctx.clearRect(0, 0, 500, 500)
     movePlayer();
     drawPlayer();
     checkAlert();
-    collisionCheck();
     meterRefresh();
-    if (level === 0) {
+    if (level === 1) {
         drawMaze();
-    } else if (level === 1) {
+        collisionCheck();
+    } else if (level === 2) {
         drawMaze2();
+        collisionCheck2();
+    } else if (level === 3) {
+        drawMaze3();
+        collisionCheck3();
+    } else {
+        drawCheckpoint();
     }
 }
 
-setInterval(refreshUI, 10);
-setInterval(refreshUITimer, 1000);
+var myInterval = setInterval(refreshUI, 10);
+var myInterval2 = setInterval(refreshUITimer, 1000);
